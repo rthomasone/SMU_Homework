@@ -1,0 +1,5 @@
+,Mouse ID,Timepoint,Tumor Volume (mm3),Metastatic Sites,Drug Regimen,Sex,Age_months,Weight (g),_merge
+360,g989,5,47.57039208,0,Propriva,Female,21,26,left_only
+681,g989,10,49.880527799999996,0,Propriva,Female,21,26,left_only
+869,g989,15,53.44201976,0,Propriva,Female,21,26,left_only
+1111,g989,20,54.65765008,1,Propriva,Female,21,26,left_only
