@@ -163,9 +163,75 @@ def scrape_URL_4():
     return rtnDict
 
 
-def Merge(dict1, dict2, dict3, dict4): 
+def scrape_hemisphere(html_text):
+    # Soupify the html text
+    hemi_soup = BeautifulSoup(html_text, "html.parser")
 
-    merged_dict = {**dict1, **dict2, **dict3, **dict4} 
+    # Try to get href and text except if error.
+    try:
+        title_elem = hemi_soup.find("h2", class_="title").get_text()
+        sample_elem = hemi_soup.find("a", text="Sample").get("href")
+
+    except AttributeError:
+
+        # Image error returns None for better front-end handling
+        title_elem = None
+        sample_elem = None
+
+    hemisphere = {
+        "title": title_elem,
+        "img_url": sample_elem
+    }
+    
+    return hemisphere
+
+
+
+def scrape_URL_5():
+    #Leverage Splinter to Web Scrape
+    executable_path = {'executable_path': r"/home/bdr/Desktop/chromedriver"}
+    browser = Browser('chrome', **executable_path, headless=True)
+    
+    #*** URL 5: Mars Hemispheres ****
+    url = (
+        "https://astrogeology.usgs.gov/search/"
+        "results?q=hemisphere+enhanced&k1=target&v1=Mars"
+    )
+    
+    browser.visit(url)
+    #html_text = browser.html
+    
+    #Empty dictionary to hold values
+    hemisphere_image_urls = []
+    for i in range(4):
+
+        # Find the elements on each loop to avoid a stale element exception
+        browser.find_by_css("a.product-item h3")[i].click()
+        
+        hemi_data = scrape_hemisphere(browser.html)
+
+        # Append hemisphere object to list
+        hemisphere_image_urls.append(hemi_data)
+
+        # Finally, we navigate backwards
+        browser.back()
+
+    
+    #Close Browser
+    browser.quit()    
+ 
+
+    # Create Dictionary with Target Information
+    rtnDict = {
+        "hemisphere_url_images": hemisphere_image_urls
+    }
+    
+    return rtnDict
+
+
+def Merge(dict1, dict2, dict3, dict4, dict5): 
+
+    merged_dict = {**dict1, **dict2, **dict3, **dict4, **dict5} 
 
     return merged_dict
 
@@ -174,9 +240,10 @@ def webScrapeMars():
     mars_news = scrape_URL_1()
     jpl_image = scrape_URL_2()
     mars_weather = scrape_URL_3()
+    mars_hemi = scrape_URL_5()
     mars_facts = scrape_URL_4()
     
     #consolidate individual dictionaries
-    mars_info = Merge(mars_news, jpl_image, mars_weather, mars_facts)
+    mars_info = Merge(mars_news, jpl_image, mars_weather, mars_hemi, mars_facts)
     
     return mars_info

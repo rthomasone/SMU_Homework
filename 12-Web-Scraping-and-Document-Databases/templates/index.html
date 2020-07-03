@@ -121,29 +121,48 @@
         </div>
 
 
-
-        <!-- Mars Hemispheres -->
-        <div class="row " id="mars-hemispheres " style="margin-top:80px; ">
-
-            <div class="page-header ">
-                <h2 class="text-center ">Mars Hemispheres</h2>
-            </div>
-
-
-            {% for hemisphere in mars.hemispheres %}
-            <div class="col-md-6 ">
-                <div class="thumbnail ">
-
-                    <!-- if images is False/None/non-existent, then default to error message -->
-                    <img src="{{hemisphere.img_url | default( 'static/images/error.png', true)}} " alt="... ">
-                    <div class="caption ">
-                        <h3>{{hemisphere.title}}</h3>
+    <!-- Mars Hemispheres -->
+    <div class="container-fluid ">
+        <div class="row ">
+            <div class="col-md-12 ">
+                <div class="card border-primary mb-3 ">
+                    <div class="card-header ">
+                        <h2>Mars Hemispheres</h2>
+                    </div>
+                    <div class="card-body ">
+                        <!-- Nested Bootstrap Grid for additional layout control -->
+                        <div class="container-fluid ">
+                            <div class="row ">
+                                <div class="col-md-12 ">
+                                    <p>Select a graph to explore further...</p>
+                                </div>
+                            </div>
+                            <div class="row text center ">
+                                <div class="col-md-6 col-sm-6 ">
+                                    <a href="{{mars.hemisphere_url_images[0].img_url}} "><img class="image_inline image_clickable img-fluid " src="{{mars.hemisphere_url_images[0].img_url | default( 'static/images/error.png', true) }} "></a>
+                                    <p class="subtitle ">{{mars.hemisphere_url_images[0].title}}</p>
+                                </div>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <a href="{{mars.hemisphere_url_images[1].img_url}} "><img class="image_inline image_clickable img-fluid " src="{{mars.hemisphere_url_images[1].img_url | default( 'static/images/error.png', true) }} "></a>
+                                    <p class="subtitle ">{{mars.hemisphere_url_images[1].title}}</p>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-md-6 col-sm-6 ">
+                                    <a href="{{mars.hemisphere_url_images[2].img_url}} "><img class="image_inline image_clickable img-fluid " src="{{mars.hemisphere_url_images[2].img_url | default( 'static/images/error.png', true) }} "></a>
+                                    <p class="subtitle ">{{mars.hemisphere_url_images[2].title}}</p>
+                                </div>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <a href="{{mars.hemisphere_url_images[3].img_url}} "><img class="image_inline image_clickable img-fluid " src="{{mars.hemisphere_url_images[3].img_url | default( 'static/images/error.png', true) }} "></a>
+                                    <p class="subtitle ">{{mars.hemisphere_url_images[3].title}}</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            {% endfor %}
-
         </div>
+    </div>
 
     </div>
 </body>
