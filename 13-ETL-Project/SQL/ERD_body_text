@@ -1,0 +1,33 @@
+source
+- 
+source_id SERIAL PK
+source_name varchar(50)
+source_url varchar(200)
+last_updated timestamp
+
+
+region
+-
+region_id SERIAL PK
+region_name varchar(50)
+last_updated timestamp
+
+
+chart_type
+-
+chart_id SERIAL PK
+chart_name varchar(50)
+last_updated timestamp
+
+
+tracks
+-
+track_id SERIAL PK
+position INT
+title varchar(100)
+artist varchar(100)
+streams INT,
+source_id INT FK >- source.source_id
+region_id INT FK >- region.region_id
+chart_id INT FK >- chart_type.chart_id
+last_updated timestamp
