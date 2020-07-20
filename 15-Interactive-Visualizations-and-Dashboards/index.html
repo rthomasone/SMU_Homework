@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bellybutton Biodiversity</title>
+    <!-- Import BootStrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Import BootSwatch -->
+    <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.min.css">
+    <!-- Import Ajax -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Import Plotly -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="./static/js/app.js"></script>
+</head>
+
+<body>
+
+    <!-- Jumbotron -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 jumbotron">
+                <h1 class="display-3">Belly Button Biodiversity Dashboard</h1>
+                <p class="lead"></p>
+                <hr class="my-4">
+                <p>Use the interactive charts below to explore the dataset</p>
+                <p class="lead">
+                    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                </p>
+            </div>
+        </div>
+
+
+        <div class="row container container-fluid">
+            <div class="col-md-2">
+                <div class="card border-primary mb-3">
+                    <div class="card-header"></div>
+                    <div class="card-body">
+                        <h4 class="card-title"></h4>
+                        <p class="card-text"></p>
+
+                        <!-- Test Subject Selector -->
+                        <div class="well">
+                            <h5>Test Subject ID No.:</h5>
+                            <select id="selDataset" onchange="optionChanged(this.value)"></select>
+                        </div>
+
+                        <!-- Summary Table -->
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Demographic Info</h3>
+                            </div>
+                            <div id="sample-metadata" class="panel-body"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Horizontal Bar Chart -->
+            <div class="col-md-5">
+                <div class="card border-primary mb-3">
+                    <div class="card-header"></div>
+                    <div class="card-body">
+                        <h4 class="card-title"></h4>
+                        <p class="card-text"></p>
+                        <div id="bar"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gauge Chart -->
+            <div class="col-md-5">
+                <div class="card border-primary mb-3">
+                    <div class="card-header"></div>
+                    <div class="card-body">
+                        <h4 class="card-title"></h4>
+                        <p class="card-text"></p>
+                        <div id="gauge"></div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- Bubble Chart -->
+        <div class="row container container-fluid">
+            <div class="col-md-12">
+                <div class="card text-white bg-primary mb-3">
+                    <div class="card-header">Header</div>
+                    <div class="card-body">
+                        <h4 class="card-title">Primary card title</h4>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <div id="bubble"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
