@@ -82,6 +82,16 @@
                 <option value="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson" selected>Past 7 Days </option>
                 <option value="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson">Past 30 Days</option>
             </select>
+            <label for="magFilter">Select a Magnitude:</label>
+            <select id="magFilter" name="magFilter">
+                <option value="-1" selected>All</option>
+                <option value="5">5 or Higher</option>
+                <option value="4">4 or Higher</option>
+                <option value="3">3 or Higher</option>
+                <option value="2">2 or Higher</option>
+                <option value="1">1 or Higher</option>
+            </select>
+
         </div>
         <br>
         <div id="mapParent" class="container-fluid"></div>

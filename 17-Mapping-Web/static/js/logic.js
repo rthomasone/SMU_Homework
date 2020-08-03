@@ -1,17 +1,18 @@
 $(document).ready(function() {
     let fullURL = $('#timeFilter').val();
-    makeMap(fullURL);
+    makeMap(fullURL, -1);
 
     //Event Listener on Dropdown Change
-    $('#timeFilter').change(function() {
+    $("#timeFilter, #magFilter").change(function() {
         let fullURL = $('#timeFilter').val();
-        let vizText = $("#timeFilter opetion:selected").text();
+        let minMag = $('#magFilter').val();
+        let vizText = $("#timeFilter option:selected").text();
         $('#vizTitle').text(`Earthquake in the ${vizText}`)
-        makeMap(fullURL);
+        makeMap(fullURL, minMag);
     });
 });
 
-function makeMap(fullURL) {
+function makeMap(fullURL, minMag) {
     //Clear Map
     $('#mapParent').empty();
     $('#mapParent').append('<div style="height:700px" id="map"></div>');
@@ -71,22 +72,26 @@ function makeMap(fullURL) {
 
         earthquakes.forEach(function(earthquake) {
             if ((earthquake.geometry.coordinates[1]) && (earthquake.geometry.coordinates[0])) {
-                //Create Markers for Cluster
-                let temp = L.marker([+earthquake.geometry.coordinates[1], +earthquake.geometry.coordinates[0]]).bindPopup(`<h5>${earthquake.properties.place}</h5><hr><p><b>Magitude:</b> ${earthquake.properties.mag}<br><b>Time:</b> ${new Date(earthquake.properties.time)}<br><b>Latitude:</b> ${earthquake.geometry.coordinates[1]}<br><b>Longitude:</b> ${earthquake.geometry.coordinates[0]}<br><a href="${earthquake.properties.url}" target="_blank">Link to earthquake details</a></p>`);
-                markers.addLayer(temp);
 
-                //Store Heatmap Points
-                heatArray.push([+earthquake.geometry.coordinates[1], +earthquake.geometry.coordinates[0]]);
+                if (earthquake.properties.mag >= minMag) { //magnitude filter
 
-                //Generate Cirles
-                let circle = L.circle([+earthquake.geometry.coordinates[1], +earthquake.geometry.coordinates[0]], {
-                    fillOpacity: 0.75,
-                    fillColor: getCircleColor(earthquake.properties.mag),
-                    color: getLineColor(earthquake.properties.mag),
-                    radius: getMarkerSize(earthquake.properties.mag)
-                }).bindPopup(`<h5>${earthquake.properties.place}</h5><hr><p><b>Magitude:</b> ${earthquake.properties.mag}<br><b>Time:</b> ${new Date(earthquake.properties.time)}<br><b>Latitude:</b> ${earthquake.geometry.coordinates[1]}<br><b>Longitude:</b> ${earthquake.geometry.coordinates[0]}<br><a href="${earthquake.properties.url}" target="_blank">Link to earthquake details</a></p>`);
+                    //Create Markers for Cluster
+                    let temp = L.marker([+earthquake.geometry.coordinates[1], +earthquake.geometry.coordinates[0]]).bindPopup(`<h5>${earthquake.properties.place}</h5><hr><p><b>Magitude:</b> ${earthquake.properties.mag}<br><b>Time:</b> ${new Date(earthquake.properties.time)}<br><b>Latitude:</b> ${earthquake.geometry.coordinates[1]}<br><b>Longitude:</b> ${earthquake.geometry.coordinates[0]}<br><a href="${earthquake.properties.url}" target="_blank">Link to earthquake details</a></p>`);
+                    markers.addLayer(temp);
 
-                circles.push(circle);
+                    //Store Heatmap Points
+                    heatArray.push([+earthquake.geometry.coordinates[1], +earthquake.geometry.coordinates[0]]);
+
+                    //Generate Cirles
+                    let circle = L.circle([+earthquake.geometry.coordinates[1], +earthquake.geometry.coordinates[0]], {
+                        fillOpacity: 0.75,
+                        fillColor: getCircleColor(earthquake.properties.mag),
+                        color: getLineColor(earthquake.properties.mag),
+                        radius: getMarkerSize(earthquake.properties.mag)
+                    }).bindPopup(`<h5>${earthquake.properties.place}</h5><hr><p><b>Magitude:</b> ${earthquake.properties.mag}<br><b>Time:</b> ${new Date(earthquake.properties.time)}<br><b>Latitude:</b> ${earthquake.geometry.coordinates[1]}<br><b>Longitude:</b> ${earthquake.geometry.coordinates[0]}<br><a href="${earthquake.properties.url}" target="_blank">Link to earthquake details</a></p>`);
+
+                    circles.push(circle);
+                }
             }
         });
 
